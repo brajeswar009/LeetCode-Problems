@@ -1,9 +1,11 @@
 class Solution {
     public int numJewelsInStones(String jewels, String stones) {
+        char jewelsArr[] = jewels.toCharArray();
+        char stonesArr[] = stones.toCharArray();
         int count = 0;
-        for (int i = 0; i < jewels.length(); i++) {
-            for (int j = 0; j < stones.length(); j++) {
-                if (jewels.charAt(i) == stones.charAt(j))
+        for (char j : jewelsArr) {
+            for (char s : stonesArr) {
+                if(j == s)
                     count++;
             }
         }
