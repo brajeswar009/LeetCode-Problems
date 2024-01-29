@@ -1,23 +1,25 @@
 class Solution {
     public int maxFrequencyElements(int[] nums) {
-        int maxCount = 0;
-        HashMap<Integer, Integer> map = new HashMap<>();
-        // filling the hashmap with number and their count by using getOrDefault
-        // which will return the value of the given key, if the key comes for first time
-        // then value will be 1, if it repeats then previous value +1
+        int maxNum = 0;
+        // step 1: Finding maximum element of nums array to create another array of that
+        // size
         for (int i : nums) {
-            map.put(i, map.getOrDefault(i, 0) + 1);
+            maxNum = Math.max(maxNum, i);
         }
-        // using stream() to convert the collection to stream and using max() of stream
-        // class to find maximum in the values.
-        // compare() method of Interger class to compare values
-        maxCount = map.values().stream().max(Integer::compare).get();
-        System.out.println(maxCount);
-        int count = 0;
-        for (int i : map.values()) {
+        // step 2: Creating an array to store numbers count in their index positons
+        // ex; 1 count in index 1, 2 count in index 2, 3 count in index 3 so on.
+        int freq[] = new int[maxNum + 1];
+        int maxCount = 0;
+        for (int i : nums) {
+            freq[i]++;
+            maxCount = Math.max(maxCount, freq[i]);
+        }
+        // Step 3: Counting total occurance of maxCount 
+        int total = 0;
+        for (int i : freq) {
             if (i == maxCount)
-                count++;
+                total += i;
         }
-        return count * maxCount;
+        return total;
     }
 }
