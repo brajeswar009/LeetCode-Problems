@@ -1,22 +1,17 @@
 class Solution {
     public int[] replaceElements(int[] arr) {
-        int temp[] = new int[arr.length];
-        int max;
-        if (arr.length == 1)
-            temp[0] = -1;
-        else {
-            for (int i = 0; i < arr.length; i++) {
-                max = 0;
-                for (int j = i + 1; j < arr.length; j++) {
-                    if (arr[j] > max) {
-                        max = arr[j];
-                    }
-                }
-                if (max != 0)
-                    temp[i] = max;
+        int n = arr.length;
+        int max = -1;
+        for (int i = n-1; i >= 0; i--) {
+            if(arr[i] > max){
+                int temp = arr[i];
+                arr[i] = max;
+                max = temp;
             }
-            temp[temp.length - 1] = -1;
+            else{
+                arr[i] = max;
+            }
         }
-        return temp;
+        return arr;
     }
 }
