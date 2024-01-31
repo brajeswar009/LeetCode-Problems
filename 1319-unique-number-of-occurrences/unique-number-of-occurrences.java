@@ -1,13 +1,26 @@
 class Solution {
     public boolean uniqueOccurrences(int[] arr) {
-        HashMap<Integer, Integer> map = new HashMap<>();
-        for (int i : arr) {
-            map.put(i, map.getOrDefault(i, 0) + 1);
+        int countHolder[] = new int[arr.length];
+        Arrays.sort(arr);
+        int idx = 0;
+        for (int i = 0; i < arr.length; i++) {
+            int count = 1;
+            while (i + 1 < arr.length && arr[i] == arr[i + 1]) {
+                count++;
+                i++;
+            }
+            countHolder[idx++] = count;
         }
-        Set<Integer> valueSet = new HashSet<>();
-        for(int x: map.values()){
-            valueSet.add(x);
+        Arrays.sort(countHolder);
+        // System.out.println(Arrays.toString(countHolder));
+        int x = 0;
+        while (countHolder[x] == 0) {
+            x++;
         }
-        return map.size() == valueSet.size();
+        for (int i = x + 1; i < countHolder.length; i++) {
+            if (countHolder[i] == countHolder[i - 1])
+                return false;
+        }
+        return true;
     }
 }
