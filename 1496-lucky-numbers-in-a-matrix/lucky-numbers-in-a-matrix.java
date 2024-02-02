@@ -1,24 +1,38 @@
 class Solution {
     public List<Integer> luckyNumbers (int[][] matrix) {
-        List<Integer> res = new ArrayList<>();
-        for (int i = 0; i < matrix.length; i++) {
-            int min = Integer.MAX_VALUE, minIndex = 0;
-            for (int j = 0; j < matrix[i].length; j++) {
-                if (matrix[i][j] < min) {
+        int rowLen = matrix.length;
+        int colLen = matrix[0].length;
+        int minInRow[] = new int[rowLen];
+        int maxInCol[] = new int[colLen];
+
+        //finding min element in of each row
+        for (int i = 0; i < rowLen; i++) {
+            int min = Integer.MAX_VALUE; 
+            for (int j = 0; j < colLen; j++) {
+                if(min > matrix[i][j]){
                     min = matrix[i][j];
-                    minIndex = j;
                 }
             }
-            // checking col
-            boolean isBig = true;
-            for (int k2 = 0; k2 < matrix.length; k2++) {
-                if (matrix[i][minIndex] < matrix[k2][minIndex]) {
-                    isBig = false;
-                    break;
+            minInRow[i] = min;
+        }
+        //finding max element in of each col
+        for (int j = 0; j < colLen; j++) {
+            int max = Integer.MIN_VALUE;
+            for (int i = 0; i < rowLen; i++) {
+                if(max < matrix[i][j]){
+                    max = matrix[i][j];
                 }
             }
-            if (isBig)
-                res.add(matrix[i][minIndex]);
+            maxInCol[j] = max;
+        }
+        // checking the common element in minInRow, maxInCol array with the matrix
+        List<Integer> res = new ArrayList<>();
+        for (int i = 0; i < rowLen; i++) {
+            for (int j = 0; j < colLen; j++) {
+                if(matrix[i][j] == minInRow[i] && maxInCol[j]==matrix[i][j]){
+                    res.add(matrix[i][j]);
+                }
+            }
         }
         return res;
     }
