@@ -51,3 +51,4 @@ class Solution {
         return arr;
     }
 }
+// same problem in GFG, code in local machine with file name as "GFgPrintMatrixDiagonal.java"
