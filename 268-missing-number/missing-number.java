@@ -1,14 +1,17 @@
 class Solution {
     public int missingNumber(int[] nums) {
-    int xorNums = 0;
-        for (int i = 1; i <= nums.length; i++) {
-            xorNums ^= i;
-        }
 
-        int xorN = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            xorN ^= nums[i];
+        int n = nums.length;
+        int assumedSum = n * (n + 1) / 2;
+        int acutalSum = 0;
+        for (int i : nums) {
+            acutalSum += i;
         }
-        return xorNums ^ xorN;
+        return assumedSum - acutalSum;
     }
 }
+
+/*
+we know that only one number is missing and we
+know sum of n natrual number is n*(n+1)/2 so using this logic
+*/
