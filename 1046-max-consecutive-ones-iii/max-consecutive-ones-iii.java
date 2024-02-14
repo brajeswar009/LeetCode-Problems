@@ -14,6 +14,8 @@ class Solution {
                 }
                 leftPointer++;
             }
+            // taking max between ans(which has previous length) 
+            // and window length(r-l+1)(current length)
             ans = Math.max(ans, rightPointer - leftPointer + 1);
         }
         return ans;
