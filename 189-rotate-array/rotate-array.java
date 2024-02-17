@@ -5,10 +5,10 @@ class Solution {
         // reverse the complete array
         // [1,2,3,4,5] => [5,4,3,2,1]
         reverseArr(nums, 0, n - 1);
-        //reverse the first half(till k-1) assume k=2
+        //reverse the first half(5 and 4) assume k=2
         // [5,4,3,2,1] => [4,5,3,2,1]
         reverseArr(nums, 0, k - 1);
-        // reverse the second half 
+        // reverse the second half(i.e. 3,2,1)
         // [4,5,3,2,1] => [4,5,1,2,3]
         reverseArr(nums, k, n - 1);
     }
