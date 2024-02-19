@@ -6,13 +6,11 @@ class Solution {
         int minInSubArr = nums[n - 1];
 
         for (int i = 1; i < nums.length; i++) {
+            int j = n - i - 1;
             maxInSubArr = Math.max(maxInSubArr, nums[i]);
             if (nums[i] < maxInSubArr) {
                 subArrEnd = i;
             }
-        }
-
-        for (int j = n - 2; j >= 0; j--) {
             minInSubArr = Math.min(minInSubArr, nums[j]);
             if (nums[j] > minInSubArr) {
                 subArrStart = j;
