@@ -1,4 +1,5 @@
 class Solution {
+    // Recursive Approach
     public int fib(int n) {
         return fibHelper(n);
     }
@@ -10,3 +11,17 @@ class Solution {
         return a+b;
     }
 }
+
+/*
+Iterative Approach
+* int current = 0;
+ * int previous = 1;
+ * int next = 0;
+ * 
+ * for (int i = 0; i < n; i++) {
+ * next = current + previous;
+ * previous = current;
+ * current = next;
+ * }
+ * return next;
+ */
