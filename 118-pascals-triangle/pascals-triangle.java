@@ -22,3 +22,5 @@ class Solution {
         return ansRow;
     }
 }
+
+//TC - O(n)
