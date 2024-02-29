@@ -8,15 +8,15 @@ class Solution {
         int left[] = Arrays.copyOfRange(nums, 0, n/2);
         // n/2 -> n-1
         int right[] = Arrays.copyOfRange(nums, n/2, n);
-        // recursive call to sort left half
+        // recursive call to get left half
         left = sortArray(left);
-        // recursive call to sort right half
+        // recursive call to get right half
         right = sortArray(right);
-        // two merge the arrays
-        return merge2SortedArray(left,right);
+        // to merge the two arrays in a sorted manner
+        return sortAndMergeArray(left,right);
     }
 
-    static int[] merge2SortedArray(int left[], int right[]){
+    static int[] sortAndMergeArray(int left[], int right[]){
         // i and j are the pointers for left and right array
         int i = 0, j = 0;
         // k is the pointer for the index of ans array
@@ -49,3 +49,6 @@ class Solution {
         return ans;
     }
 }
+
+// TC - O(nLogn)
+// SC - O(n)
