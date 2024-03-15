@@ -1,28 +1,29 @@
 class Solution {
     public int[] getSumAbsoluteDifferences(int[] nums) {
-        int leftSum = 0, rightSum = 0, totalSum = 0, n = nums.length;
+        int n = nums.length;
+        int prefix[] = new int[n];
+        int suffix[] = new int[n];
 
-        // ans array to store the result
-        int ans[] = new int[n];
-
-        // total sum of the array
-        for (int i : nums) {
-            totalSum += i;
+        // finding prefix sum
+        for (int i = 0; i < n; i++) {
+            prefix[i] = (i == 0) ? nums[i] : prefix[i - 1] + nums[i];
         }
 
+        // finding suffix sum
+        for (int i = n - 1; i >= 0; i--) {
+            suffix[i] = (i == n - 1) ? nums[i] : suffix[i + 1] + nums[i];
+        }
+
+        int ans[] = new int[n];
         for (int i = 0; i < n; i++) {
-            // finding left sum i.e a[0],[1]..,a[i-1]
-            int leftTotalAns = i * nums[i] - leftSum;
+            int prefixSum = (i == 0) ? 0 : prefix[i - 1];
+            int suffixSum = (i == n - 1) ? 0 : suffix[i + 1];
 
-            // adding nums[i] to left
-            leftSum += nums[i];
+            // leftSum and rightSum as we deduced below
+            int leftSum = i * nums[i] - prefixSum;
+            int rightSum = suffixSum - (n - 1 - i) * nums[i];
 
-            // finding right sum i.e. a[i+1],..,a[n-1]
-            rightSum = totalSum - leftSum;
-
-            int rightTotalAns = rightSum - (n - 1 - i) * nums[i];
-
-            ans[i] = leftTotalAns + rightTotalAns;
+            ans[i] = leftSum + rightSum;
         }
         return ans;
     }
