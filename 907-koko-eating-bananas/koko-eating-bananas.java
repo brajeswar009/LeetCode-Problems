@@ -5,8 +5,9 @@ class Solution {
         for (int i = 1; i < piles.length; i++) {
             max = Math.max(max, piles[i]);
         }
-        // right is highest element of array because Koko definetly can
-        // eat all bananas in the highest speed which is max element of array
+        // The maximum number of bananas Koko can eat in one hour is the maximum number
+        // of bananas from all piles
+        // minimum speed of eating must be 1
         int left = 1, right = max;
 
         while (left < right) {
@@ -20,15 +21,17 @@ class Solution {
             if (canEatAll(piles, mid, h)) {
                 right = mid;
             } else {
+                // If cant finish bananas in given
+                // hours, then increase the speed
                 left = mid + 1;
             }
         }
-        return left;
+        return right;
     }
 
     static boolean canEatAll(int piles[], int mid, int h) {
         int actualHour = 0;
-        //checking for each hour a pile completed or not
+        // checking for each hour a pile completed or not
         for (int i : piles) {
             actualHour += i / mid;
 
@@ -36,8 +39,11 @@ class Solution {
                 actualHour++;
             }
         }
-        // if acutal hour less than given hour send true otherwise 
+        // if acutal hour less than given hour send true otherwise
         // Koko will get caught
         return actualHour <= h;
+
     }
 }
+
+// TC - O(nlogP)
